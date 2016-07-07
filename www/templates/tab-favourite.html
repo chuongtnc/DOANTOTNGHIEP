@@ -1,0 +1,32 @@
+<ion-view view-title="Các từ yêu thích">
+  <ion-content>
+    <div class=" item-input-inset">
+      <label class="item-input-wrapper" style="background-color:white; border:1px solid">
+        <i class="icon ion-ios-search placeholder-icon"></i>
+        <input type="search" placeholder="Tìm kiếm" >
+      </label>
+    </div>
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right"  type="item-text-wrap" href="#/tab/favourite/1">
+        <img ng-src="tes.jqg">
+        <h2>test</h2>
+        <p>test</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+
+        <ion-option-button class="button-assertive" ng-click="remove(word)">
+          Delete
+        </ion-option-button>
+      </ion-item>
+            <ion-item class="item-remove-animate item-avatar item-icon-right"  type="item-text-wrap" href="#/tab/favourite/2">
+        <img ng-src="tes.jqg">
+        <h2>test</h2>
+        <p>test</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+
+        <ion-option-button class="button-assertive" ng-click="remove(word)">
+          Delete
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
