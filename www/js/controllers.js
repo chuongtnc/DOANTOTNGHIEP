@@ -6,31 +6,28 @@ angular.module('starter.controllers', [])
   $ionicHistory.clearCache();
   //-------------------------------------
 
-
+  //Lấy dữ liệu đầu tiên
   $scope.words = Data.all();
-  $scope.remove = function(word) {
-    Data.remove(word);
-  };
 
 })
 
-.controller('FavouriteCtrl', function($scope, $ionicHistory) {
+.controller('FavouriteCtrl', function($scope, $ionicHistory, Data) {
   //2 Hàm này để Back button chạy ổn định
   $ionicHistory.clearHistory();
   $ionicHistory.clearCache();
   //--------------------------------------
+
+  $scope.words = Data.favourite();
+
 })
 
-.controller('DetailCtrl', function($scope, $stateParams, Data, $ionicHistory) {
-  // $scope.$on('$ionicView.beforeEnter', function(event, viewData) {
-  //   viewData.enableBack = true;
-  // });
-  // $ionicHistory.nextViewOptions({
-  //   disableBack: true
-  // });
-  console.log($ionicHistory.backTitle());
-  $scope.word = Data.get($stateParams.id);
+.controller('DetailCtrl', function($scope, $stateParams, Data) {
+  $scope.word = Data.get($stateParams.id);  
 
+  $scope.changeFavourite = function(id, status)
+  {
+    Data.changeFavourite(id, status === 1 ? 0:1);
+  };
 })
 
 .controller('SettingCtrl', function($scope, $ionicHistory) {
@@ -38,8 +35,4 @@ angular.module('starter.controllers', [])
   $ionicHistory.clearHistory();
   $ionicHistory.clearCache();
   //-----------------------------------
-
-  $scope.settings = {
-    enableFriends: true
-  };
 })

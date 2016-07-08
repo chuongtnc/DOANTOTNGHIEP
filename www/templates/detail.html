@@ -11,24 +11,22 @@
       <div class="item responsive-sm">
         <div class="row">
           <div class="col col-50">
-            <h1>{{word.name}}(n)</h1>
-            <p><i>{{word.meaning}}</i></p>
+            <h2><b>{{word.NAME}}({{word.TYPE}})</b></h2>
+            <p><i>{{word.TRANSLITERATION}}</i></p>
+            <p><i>{{word.MEANING}}</i></p>
           </div>
           <div class="col col-50 text-right col-center">
             <button class="button button-icon ion-volume-high" style="font-size:50px;"></button>
-            <button class="button button-icon ion-ios-star" style="font-size:50px; color:yellow;"></button>
+            <button ng-class="word.STATUS === 0 ? 'button button-icon ion-ios-star-outline' : 'button button-icon ion-ios-star'" style="font-size:50px; color:#FE4006;" ng-click="changeFavourite(word.$id,word.STATUS)"></button>
           </div>
         </div>
       </div>
-
       <div class="item item-body">
-        <img class="full-image" src="img/adam.jpg">
+        <img class="full-image"  src="{{word.IMAGE}}">
         <p>
-          <p>{{word.example}}</p>
+          <p>{{word.EXAMPLE}}</p>
         </p>
-
       </div>
-
     </div>
   </ion-content>
 </ion-view>

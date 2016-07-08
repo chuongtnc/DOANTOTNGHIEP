@@ -5,7 +5,8 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+var db = null;
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova', 'firebase'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -20,6 +21,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
   });
 })
 
@@ -33,23 +35,22 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   // setup an abstract state for the tabs directive
     .state('tab', {
     url: '/tab',
-    abstract:true,
+    abstract: true,
     templateUrl: 'templates/tabs.html'
   })
 
   // Each tab has its own nav history stack:
 
   .state('tab.find', {
-    url: '/find',
-    views: {
-      'tab-find': {
-        templateUrl: 'templates/tab-find.html',
-        controller: 'FindCtrl'
+      url: '/find',
+      views: {
+        'tab-find': {
+          templateUrl: 'templates/tab-find.html',
+          controller: 'FindCtrl'
+        }
       }
-    }
-  })
-
-  .state('tab.favourite', {
+    })
+    .state('tab.favourite', {
       url: '/favourite',
       views: {
         'tab-favourite': {
@@ -75,17 +76,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           controller: 'DetailCtrl'
         }
       }
-    })    
-
-  .state('tab.setting', {
-    url: '/setting',
-    views: {
-      'tab-setting': {
-        templateUrl: 'templates/tab-setting.html',
-        controller: 'SettingCtrl'
+    })
+    .state('tab.setting', {
+      url: '/setting',
+      views: {
+        'tab-setting': {
+          templateUrl: 'templates/tab-setting.html',
+          controller: 'SettingCtrl'
+        }
       }
-    }
-  });
+    });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/find');

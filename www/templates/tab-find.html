@@ -7,15 +7,10 @@
     </label>
   </div>
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="word in words" type="item-text-wrap" href="#/tab/find/{{word.id}}">
-        <img ng-src="{{word.face}}">
-        <h2>{{word.name}}</h2>
-        <p>{{word.lastText}}</p>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="word in words" type="item-text-wrap" href="#/tab/find/{{word.$id}}">
+        <img ng-src="{{word.IMAGE}}">
+        <h2 style="padding-top:10px"><b>{{word.NAME}}</b></h2>
         <i class="icon ion-chevron-right icon-accessory"></i>
-
-        <ion-option-button class="button-assertive" ng-click="remove(word)">
-          Delete
-        </ion-option-button>
       </ion-item>
     </ion-list>
 
