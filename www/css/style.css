@@ -1,1 +1,24 @@
 /* Empty. Add your own CSS if you like */
+.chat-item.ng-enter {
+    -webkit-animation: fadeInLeft 0.5s;
+    animation: fadeInLeft 0.5s;
+}
+.chat-item.ng-enter-stagger {
+  -webkit-animation-delay:200ms;
+  animation-delay:100ms;
+
+  /* override to make sure it's not inherited from other styles */
+  -webkit-animation-duration:0;
+  animation-duration:0;
+}
+
+.spinner svg {
+  width: 40px;
+  height: 40px;
+  stroke: #FFF;
+  fill: #FFF;
+
+}
+.loading{
+  background-color: transparent !important;
+}

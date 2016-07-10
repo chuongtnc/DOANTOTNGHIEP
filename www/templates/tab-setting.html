@@ -5,6 +5,13 @@
     <ion-toggle  ng-model="settings.enableFriends">
         Enable Friends
     </ion-toggle>
+
+  	<button class="button button-outline button-calm button-full" modal-select="" ng-model="someObjModel" options="selectables" modal-title="Chọn ngôn ngữ" on-select="shoutLoud(newValue, oldValue)">
+		<i class="icon ion-loop"></i> Đồng bộ hóa ngôn ngữ
+		<div class="option">
+		  {{option.name}}
+		</div>
+	</button>
     </ion-list>
   </ion-content>
 </ion-view>

@@ -6,25 +6,57 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 var db = null;
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova', 'firebase'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova', 'firebase', 'ionic-modal-select'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $cordovaSQLite, $firebaseArray) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
-
     }
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
-
   });
-})
 
+  
+  if (window.sqlitePlugin !== undefined) {
+    //Chạy database nếu trên điện thoại
+    db = window.sqlitePlugin.openDatabase("DICTIONARY");
+
+  } else {
+    //Chạy database nếu trên web
+    db = window.openDatabase("DICTIONARY", "1.0", "DICTIONARY", 200000);
+  }
+
+  //Kiểm tra nếu chưa tạo table
+  $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS EV (ID INTEGER PRIMARY KEY AUTOINCREMENT, NO TEXT, NAME TEXT, STATUS INT, MEANING TEXT,TYPE TEXT, TRANSLITERATION TEXT, PRONOUNCE TEXT, IMAGE TEXT, EXAMPLE TEXT)");
+
+})
+.directive('onReadFile', function ($parse) {
+  return {
+    restrict: 'A',
+    scope: false,
+    link: function(scope, element, attrs) {
+            var fn = $parse(attrs.onReadFile);
+            
+      element.on('change', function(onChangeEvent) {
+        var reader = new FileReader();
+                
+        reader.onload = function(onLoadEvent) {
+          scope.$apply(function() {
+            fn(scope, {$fileContent:onLoadEvent.target.result});
+          });
+        };
+
+        reader.readAsText((onChangeEvent.srcElement || onChangeEvent.target).files[0]);
+      });
+    }
+  };
+})
 .config(function($stateProvider, $urlRouterProvider) {
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
