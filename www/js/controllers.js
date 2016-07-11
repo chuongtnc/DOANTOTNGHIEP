@@ -8,7 +8,6 @@ angular.module('starter.controllers', [])
 
   //Lấy dữ liệu trang find
   $rootScope.words = $data.all();
-
 })
 
 .controller('FavouriteCtrl', function($scope, $ionicHistory, $data, $rootScope) {
@@ -25,10 +24,12 @@ angular.module('starter.controllers', [])
   $scope.word = $data.get($stateParams.id);
 
   $scope.changeFavourite = function(id, status) {
-    $data.changeFavourite(id, status === 1 ? 0 : 1);
 
+      
     //Sửa lại status 
     $scope.word[0].STATUS = status === 1 ? 0 : 1;
+
+    $data.changeFavourite(id, status === 1 ? 0 : 1);
 
     //Load lại data sau khi thêm hoặc xóa các từ yêu thích
     $rootScope.words = $data.all();

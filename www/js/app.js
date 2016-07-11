@@ -32,9 +32,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     db = window.openDatabase("DICTIONARY", "1.0", "DICTIONARY", 200000);
   }
 
-  //Kiểm tra nếu chưa tạo table
-  $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS EV (ID INTEGER PRIMARY KEY AUTOINCREMENT, NO TEXT, NAME TEXT, STATUS INT, MEANING TEXT,TYPE TEXT, TRANSLITERATION TEXT, PRONOUNCE TEXT, IMAGE TEXT, EXAMPLE TEXT)");
-
 })
 .directive('onReadFile', function ($parse) {
   return {
