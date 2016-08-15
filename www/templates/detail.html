@@ -17,13 +17,13 @@
           </div>
           <div class="col col-50 text-right col-center">
             <button class="button button-icon ion-volume-high" style="font-size:50px;"></button>
-            <button ng-class="word[0].STATUS === 0 ? 'button button-icon ion-ios-star-outline' : 'button button-icon ion-ios-star'" style="font-size:50px; color:#FE4006;" ng-click="changeFavourite(word[0].ID,word[0].STATUS)"></button>
+            <button ng-class="word[0].STATUS == '0' ? 'button button-icon ion-ios-star-outline' : 'button button-icon ion-ios-star'" style="font-size:50px; color:#FE4006;" ng-click="changeFavourite(word[0].ID,word[0].STATUS)"></button>
           </div>
         </div>
       </div>
       <div class="item item-body">
-        <p>
-          {{word[0].EXAMPLE}}
+        <p style="white-space: pre;">
+          {{word[0].EXAMPLE.trim()}}
         </p>
       </div>
     </div>
