@@ -17,7 +17,7 @@ angular.module('starter.controllers', [])
   if (db == null) {
     $timeout(function() {
       $rootScope.words = $data.all();
-    }, 1000);
+    }, 2000);
   } else {
     $rootScope.words = $data.all();
   }
@@ -111,49 +111,49 @@ angular.module('starter.controllers', [])
     $rootScope.lang = newValue;
   };
 
-  // $cordovaLocalNotification.get(1).then(function(res) {
+  $cordovaLocalNotification.get(1).then(function(res) {
 
-  //   $timeout(function(){
-  //     $scope.settings.remind = true;
-  //     $scope.remindClass = "ng-show";
-  //   },100);
+    $timeout(function(){
+      $scope.settings.remind = true;
+      $scope.remindClass = "ng-show";
+    },100);
 
-  //   console.log("-------------------------" + res.at);
-  //   $scope.x.timeValue = new Date(res.at);
-  // });
+    console.log("-------------------------" + res.at);
+    $scope.x.timeValue = new Date(res.at);
+  });
 
 
-  // $scope.onRemind = function() {
-  //   if ($scope.settings.remind == false) {
-  //     $scope.remindClass = "ng-hide";
-  //     console.log("W-----------------------When remind false");
-  //     $cordovaLocalNotification.cancel(1);
-  //     $cordovaLocalNotification.clear(1);
-  //     $scope.x.timeValue = "";
-  //   }
-  //   else
-  //   {
-  //     $scope.remindClass = "ng-show";
-  //   }
-  // }
+  $scope.onRemind = function() {
+    if ($scope.settings.remind == false) {
+      $scope.remindClass = "ng-hide";
+      console.log("W-----------------------When remind false");
+      $cordovaLocalNotification.cancel(1);
+      $cordovaLocalNotification.clear(1);
+      $scope.x.timeValue = "";
+    }
+    else
+    {
+      $scope.remindClass = "ng-show";
+    }
+  }
 
-  // $scope.onTimeChange = function() {
-  //   var now = new Date($scope.x.timeValue + 10 * 1000);
-  //   $cordovaLocalNotification.schedule({
-  //     id: 1,
-  //     title: 'Tới giờ học từ rồi :)',
-  //     text: 'Nhấn để vào học',
-  //     firstAt: now,
-  //     every: "minute",
-  //     data:{state: 'tab.remaind'}
-  //   }).then(function(res) {
-  //     console.log("----------------------------" + res)
-  //   });
-  //   console.log($scope.x.timeValue);
-  // };
+  $scope.onTimeChange = function() {
+    var now = new Date($scope.x.timeValue + 10 * 1000);
+    $cordovaLocalNotification.schedule({
+      id: 1,
+      title: 'Tới giờ học từ rồi :)',
+      text: 'Nhấn để vào học',
+      firstAt: now,
+      every: "minute",
+      data:{state: 'tab.remaind'}
+    }).then(function(res) {
+      console.log("----------------------------" + res)
+    });
+    console.log($scope.x.timeValue);
+  };
 
-  // $rootScope.$on('$cordovaLocalNotification:click',
-  //   function(event, notification, state) {
-  //     $state.go(notification.data.state);
-  //   });
+  $rootScope.$on('$cordovaLocalNotification:click',
+    function(event, notification, state) {
+      $state.go(notification.data.state);
+    });
 })
