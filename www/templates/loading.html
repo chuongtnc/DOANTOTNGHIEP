@@ -1,1 +1,13 @@
-<ion-spinner icon="ios-small"></ion-spinner></br><i ng-class="$root.countWordSync == null ? 'ng-hide':'ng-show'">{{$root.countWordSync}}/{{$root.totalWordSync}}</i>
+<div ng-controller="Loadingctrl">
+	<ion-spinner icon="dots"></ion-spinner>
+	</br>
+	<h3>{{$root.langSync}}</h3>
+	</br>
+	<h3>Tổng số từ: {{$root.totalWordSync}}</h3>
+	</br>
+	<h3>Hiện có: {{$root.countWordSync}}</h3>
+	</br>
+	<button class="button button-light button-large button-outline" ng-click="cancelSync()">
+	  Hủy bỏ
+	</button>
+</div>
