@@ -6,7 +6,7 @@
     <input type="search" placeholder="Tìm kiếm" ng-change="searchChange()" ng-model="search.name" >
   </label>
   <ion-list>
-    <ion-item class="chat-item item-avatar item-icon-right" ng-repeat="word in words" type="item-text-wrap" href="#/tab/find/{{word.ID}}">
+    <ion-item class="item-avatar item-icon-right" ng-repeat="word in words" type="item-text-wrap" href="#/tab/find/{{word.ID}}">
       <h2 style="padding-top:10px"><b>{{word.NAME}}</b></h2>
       <i class="icon ion-chevron-right icon-accessory"></i>
     </ion-item>
@@ -14,7 +14,7 @@
   <ion-infinite-scroll
     on-infinite="loadMore()"
     icon="ion-loading-c"  
-    distance="1%">
+    distance="20%">
   </ion-infinite-scroll>
   </ion-content>
 </ion-view>

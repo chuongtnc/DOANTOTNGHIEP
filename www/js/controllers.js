@@ -23,25 +23,6 @@ angular.module('starter.controllers', []).controller('FindCtrl', function($scope
 		});	
     }
 
-
-            //    for(var i = 39331; i <=  51871; i++)
-            // {
-
-            //   if($rootScope.cancelSyncFlag === true) exit();
-            //   var ref = new Firebase("https://glaring-fire-4921.firebaseio.com/EV/" + i);
-            //   console.log(i);
-            //   ref.on("value", function(snapshot) {
-            //     var value = snapshot.val();
-            //     console.log(snapshot.key());
-            //     // if (typeof(value) != "undefined") {
-
-            //     //   var query = "INSERT INTO " + type + " (NO, NAME, STATUS, MEANING, TYPE, TRANSLITERATION, PRONOUNCE, IMAGE, EXAMPLE, FIREBASE_ID) VALUES ( ?, ?, ? ,? ,? ,? ,? ,? ,?, ? );";
-            //     //   $cordovaSQLite.execute(db, query, [value.NO, value.NAME, 0, value.MEANING, value.TYPE, value.TRANSLITERATION, value.PRONOUNCE, value.IMAGE, value.EXAMPLE, i]).then(function(res) {
-            //     //     $rootScope.countWordSync = i;
-            //     //   });
-            //     // }
-            //   });
-            // }
     $scope.loadMore = function() {
         if ($scope.words.length > 0) {
             $data.addDataLimit($scope.search.name, $scope.words.length, true).then(function(data){
@@ -92,7 +73,7 @@ angular.module('starter.controllers', []).controller('FindCtrl', function($scope
     //Giá trị ban đầu
     $scope.words = [];
     $scope.words = $data.addDataRemind();
-}).controller('SettingCtrl', function($scope, $ionicHistory, $ionicLoading, $sync, $rootScope, $cordovaLocalNotification, $state, $timeout) {
+}).controller('SettingCtrl', function($scope, $ionicHistory, $ionicLoading, $sync, $rootScope, $cordovaLocalNotification, $state, $timeout, $window) {
     //2 Hàm này để Back button chạy ổn định
     $ionicHistory.clearHistory();
     $ionicHistory.clearCache();
@@ -134,7 +115,9 @@ angular.module('starter.controllers', []).controller('FindCtrl', function($scope
             $scope.settings.remind = true;
             $scope.remindClass = "ng-show";
         }, 100);
-        $scope.x.timeValue = new Date(res.at);
+        console.log('----------------------------------------------');
+        console.log(JSON.parse( window.localStorage.getItem('remainTime')));
+        $scope.x.timeValue = JSON.parse(window.localStorage.getItem('remainTime'));
     });
     $scope.onRemind = function() {
         if ($scope.settings.remind == false) {
@@ -148,6 +131,7 @@ angular.module('starter.controllers', []).controller('FindCtrl', function($scope
     }
     $scope.onTimeChange = function() {
         var now = new Date($scope.x.timeValue + 10 * 1000);
+        window.localStorage.setItem('remainTime', JSON.stringify(now));
         $cordovaLocalNotification.schedule({
             id: 1,
             title: 'Tới giờ học từ rồi :)',
@@ -160,12 +144,12 @@ angular.module('starter.controllers', []).controller('FindCtrl', function($scope
         });
     };
 
-	$rootScope.$watch('continueSyncFlag', function(){
-		if($rootScope.continueSyncFlag === true)
-		{
-			ionicLoading.hide();
-		}
-	})
+	// $rootScope.$watch('continueSyncFlag', function(){
+	// 	if($rootScope.continueSyncFlag === true)
+	// 	{
+	// 		ionicLoading.hide();
+	// 	}
+	// })
 
     $rootScope.$on('$cordovaLocalNotification:click', function(event, notification, state) {
         $state.go(notification.data.state);

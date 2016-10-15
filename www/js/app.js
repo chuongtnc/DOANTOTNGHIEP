@@ -5,7 +5,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 var db = null;
-angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services', 'firebase', 'ionic-modal-select', 'ion-datetime-picker']).run(function($ionicPlatform, $cordovaSQLite, $data, $ionicLoading, $firebaseArray, $rootScope, $cordovaInAppBrowser, $timeout, $cordovaLocalNotification, $q) {
+angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services', 'firebase', 'ionic-modal-select', 'ion-datetime-picker', 'ngStorage']).run(function($ionicPlatform, $cordovaSQLite, $data, $ionicLoading, $firebaseArray, $rootScope, $cordovaInAppBrowser, $timeout, $cordovaLocalNotification, $q) {
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
